@@ -8,15 +8,18 @@ const fetchData = async () => {
 
     if(TempData.length === 0){
         try{
-            const response = await axios.getAdapter(url);
-            TempData.push(response);
+            const response = await axios.get(url);
+
+            if(response.status >= 200 && response.status < 300) {
+                console.log('Data fetched successfully:', response.data);
+                TempData.push(response.data);
+            }
         }
         catch(error){
             console.error(`Error fetching data : `, error);
             throw error;
         }
     }
-
     return TempData;
 }
 
