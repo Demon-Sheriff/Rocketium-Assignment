@@ -17,7 +17,6 @@ const readData = () => {
 
         // read data fromt the file
         const rawData = fs.readFileSync(filePath, 'utf-8');
-        console.log("API call success");
         return JSON.parse(rawData);
     }
     catch(err){
@@ -31,6 +30,13 @@ const readData = () => {
 const getDataById = (id) => {
 
     const data = readData();
+
+    if(!fs.existsSync(path.dirname(filePath))){
+
+        console.log("Run the initialisation script first to fetch the data");
+        return {Error_Message : "Run the initialisation script first to fetch the data, Refer the docs on how to run the script"};
+    }
+
     if(data === null) return null;
     
     // check if the id exists or not.
@@ -46,4 +52,29 @@ const getDataById = (id) => {
     return {Error_Message : "Id doesn't exist"};
 };
 
-module.exports = {readData, getDataById};
+const getSortedData = (order = 'asc') => {
+
+    const data = readData();
+    // if the script has not been intialised yet.
+    if(!fs.existsSync(path.dirname(filePath))){
+
+        console.log("Run the initialisation script first to fetch the data");
+        return {Error_Message : "Run the initialisation script first to fetch the data, Refer the docs on how to run the script"};
+    }
+
+    if(data === null) {
+        return null; 
+    }
+
+    // Sort data by name
+    return data.sort((a, b) => {
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+
+        if (nameA < nameB) return order === 'asc' ? -1 : 1;
+        if (nameA > nameB) return order === 'asc' ? 1 : -1;
+        return 0;
+    });
+};
+
+module.exports = {readData, getDataById, getSortedData};
