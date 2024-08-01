@@ -23,6 +23,8 @@ const fetchData = async () => {
         if(response.status >= 200 && response.status < 300) {
             console.log('Data fetched successfully:', response.data);
 
+            const data = response.data;
+
             // get the directory part of the file path
             const dir = path.dirname(filePath);
 
