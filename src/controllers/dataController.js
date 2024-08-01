@@ -5,6 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const filePath = path.join(__dirname, '..', 'data', 'Data.json');
 
+
 const readData = () => {
 
     try{
@@ -52,9 +53,8 @@ const getDataById = (id) => {
     return {Error_Message : "Id doesn't exist"};
 };
 
-const getSortedData = (order = 'asc') => {
+const getSortedData = (order = 'asc', data = null) => {
 
-    const data = readData();
     // if the script has not been intialised yet.
     if(!fs.existsSync(path.dirname(filePath))){
 
@@ -62,12 +62,16 @@ const getSortedData = (order = 'asc') => {
         return {Error_Message : "Run the initialisation script first to fetch the data, Refer the docs on how to run the script"};
     }
 
+    if(!data){
+        data = readData();
+    }
+    
     if(data === null) {
         return null; 
     }
 
     // Sort data by name
-    return data.sort((a, b) => {
+    resData = data.sort((a, b) => {
         const nameA = a.name.toLowerCase();
         const nameB = b.name.toLowerCase();
 
@@ -75,6 +79,25 @@ const getSortedData = (order = 'asc') => {
         if (nameA > nameB) return order === 'asc' ? 1 : -1;
         return 0;
     });
+
+    return resData;
 };
 
-module.exports = {readData, getDataById, getSortedData};
+// filter by language
+const getDataByLanguage = (language) => {
+
+    // if the script has not been intialised yet.
+    if(!fs.existsSync(path.dirname(filePath))){
+
+        console.log("Run the initialisation script first to fetch the data");
+        return {Error_Message : "Run the initialisation script first to fetch the data, Refer the docs on how to run the script"};
+    }
+
+    const data = readData();
+
+    const resData = data.filter(item => item.language && item.language.toLowerCase() === language.toLowerCase());
+    return resData.length > 0 ? resData : {Error_Message : "Language does not exist"};;
+};
+
+
+module.exports = {readData, getDataById, getSortedData, getDataByLanguage};

@@ -2,22 +2,31 @@ const express = require('express')
 const router = express.Router();
 const dataController = require('../controllers/dataController');
 
-// get complete data
+// get complete data/ sorted data (asc or desc)/ data with a specific language
 router.get('/data', (req, res) => {
-    const data = dataController.readData();
-    res.json(data);
-});
 
-router.get('/data/sorted', (req, res) => {
-    
-    const order = req.query.order === 'desc' ? 'desc' : 'asc'; // Default to 'asc'
-    const sortedData = dataController.getSortedData(order);
+    const { language, order } = req.query;
 
-    if (sortedData === null) {
+    // fetch data
+    let data = dataController.readData();
+
+    if(data === null){
         return res.status(500).json({ error: "Data not available. Please run the initialization script." });
     }
 
-    res.json(sortedData);
+    // filter by language if specified
+    if(language){
+        data = dataController.getDataByLanguage(language);
+    }
+
+    // sort data if specified
+    if(order){
+        data = dataController.getSortedData(order, data);
+    }
+
+    // Return the data
+    res.json(data);
+
 });
 
 
