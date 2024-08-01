@@ -42,7 +42,6 @@ const fetchData = async () => {
     catch(error){
         console.error(`Error fetching data : `, error);
     }
-    return TempData;
 }
 
 

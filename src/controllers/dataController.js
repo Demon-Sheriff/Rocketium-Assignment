@@ -3,7 +3,6 @@
 // import the file from which we have to read data
 const path = require('path');
 const fs = require('fs');
-const { measureMemory } = require('vm');
 const filePath = path.join(__dirname, '..', 'data', 'Data.json');
 
 const readData = () => {
