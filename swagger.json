@@ -1,0 +1,86 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Your API Title",
+      "version": "1.0.0",
+      "description": "Your API Description"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000",
+        "description": "Local server"
+      }
+    ],
+    "paths": {
+      "/data": {
+        "get": {
+          "summary": "Get all data",
+          "responses": {
+            "200": {
+              "description": "A list of data",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/DataItem"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/data/{id}": {
+        "get": {
+          "summary": "Get data by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "The ID of the data item"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "A single data item",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/DataItem"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Data item not found"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "DataItem": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "language": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  
