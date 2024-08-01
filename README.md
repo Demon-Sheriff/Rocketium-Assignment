@@ -6,6 +6,7 @@ This project is a Node.js application that fetches and serves dummy JSON data. T
 
 ## Project Structure
 
+```
 Rocketium-Assignment/
 │
 ├── data/
@@ -23,7 +24,7 @@ Rocketium-Assignment/
 ├── package.json
 ├── package-lock.json
 └── server.js
-
+```
 
 ## Installation and Setup
 
