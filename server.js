@@ -9,3 +9,6 @@ app.listen(port, (err) => {
   }
   console.log(`Server is running on port ${port}`);
 });
+
+ 
+// data (as of now) is being logged into an array, we will be storing it in our DB

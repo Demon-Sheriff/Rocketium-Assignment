@@ -1,4 +1,4 @@
-const dataService = require('../services/dataServices') // import the services for the controller
+const dataService = require('../scripts/fetchData') // import the services for the controller
 
 const getData = async(req, res) => {
 
