@@ -28,4 +28,22 @@ const readData = () => {
 
 };
 
-module.exports = {readData};
+const getDataById = (id) => {
+
+    const data = readData();
+    if(data === null) return null;
+    
+    // check if the id exists or not.
+    for(let i=0; i<data.length; i++){
+
+        if(data[i].id === id){
+            console.log("Data with id found")
+            return data[i];
+        }
+    }
+
+    console.log("Id doesn't exist")
+    return {Error_Message : "Id doesn't exist"};
+};
+
+module.exports = {readData, getDataById};
