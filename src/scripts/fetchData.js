@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 // path of the file where the data will be saved
-const filePath = path.join(__dirname, 'data', 'Data.json');
+const filePath = path.join(__dirname, '..', 'data', 'Data.json');
 
 const url = 'https://microsoftedge.github.io/Demos/json-dummy-data/256KB.json';
 
