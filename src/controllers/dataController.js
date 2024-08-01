@@ -17,11 +17,13 @@ const readData = () => {
 
         // read data fromt the file
         const rawData = fs.readFileSync(filePath, 'utf-8');
+        console.log("API call success");
         return JSON.parse(rawData);
     }
     catch(err){
+
         console.error("Error reading data:", err.message);
-        return null;
+        return {err};
     }
 
 };
