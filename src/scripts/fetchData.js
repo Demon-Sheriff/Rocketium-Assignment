@@ -11,9 +11,7 @@ const url = 'https://microsoftedge.github.io/Demos/json-dummy-data/256KB.json';
 // fetch data service
 const fetchData = async () => {
 
-    // if our 
     try{
-
         // if the file has already been created using the script
         if(fs.existsSync(filePath)){
             console.log(`Data already fetched and saved at : ${filePath}`);
@@ -24,7 +22,6 @@ const fetchData = async () => {
 
         if(response.status >= 200 && response.status < 300) {
             console.log('Data fetched successfully:', response.data);
-            TempData.push(response.data);
 
             // get the directory part of the file path
             const dir = path.dirname(filePath);
