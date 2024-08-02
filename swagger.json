@@ -1,31 +1,35 @@
 {
-    "openapi": "3.0.0",
+    "swagger": "2.0",
     "info": {
-      "title": "Your API Title",
       "version": "1.0.0",
-      "description": "Your API Description"
+      "title": "Rocketium Assignment API",
+      "description": "API documentation for Rocketium Assignment project"
     },
-    "servers": [
+    "host": "localhost:3000",
+    "basePath": "/api",
+    "tags": [
       {
-        "url": "http://localhost:3000",
-        "description": "Local server"
+        "name": "Data",
+        "description": "API for data in the system"
       }
     ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
     "paths": {
       "/data": {
         "get": {
-          "summary": "Get all data",
+          "tags": ["Data"],
+          "summary": "Get complete data",
+          "description": "Retrieve all the data from the server",
+          "produces": ["application/json"],
           "responses": {
             "200": {
-              "description": "A list of data",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/DataItem"
-                    }
-                  }
+              "description": "Successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Data"
                 }
               }
             }
@@ -34,50 +38,44 @@
       },
       "/data/{id}": {
         "get": {
-          "summary": "Get data by ID",
+          "tags": ["Data"],
+          "summary": "Get data by specific id",
+          "description": "Retrieve a specific data item by its ID",
           "parameters": [
             {
               "name": "id",
               "in": "path",
               "required": true,
-              "schema": {
-                "type": "string"
-              },
-              "description": "The ID of the data item"
+              "type": "string",
+              "description": "ID of the data item to retrieve"
             }
           ],
           "responses": {
             "200": {
-              "description": "A single data item",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/DataItem"
-                  }
-                }
+              "description": "Successful operation",
+              "schema": {
+                "$ref": "#/definitions/Data"
               }
             },
             "404": {
-              "description": "Data item not found"
+              "description": "Data not found"
             }
           }
         }
       }
     },
-    "components": {
-      "schemas": {
-        "DataItem": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "language": {
-              "type": "string"
-            }
+    "definitions": {
+      "Data": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
           }
         }
       }

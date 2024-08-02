@@ -2,21 +2,6 @@ const express = require('express')
 const router = express.Router();
 const dataController = require('../controllers/dataController');
 
-/**
- * @swagger
- * /data:
- *   get:
- *     summary: Get all data
- *     responses:
- *       200:
- *         description: A list of data
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/DataItem'
- */
 router.get('/data', (req, res) => {
 
     const { language, order } = req.query;
@@ -44,28 +29,6 @@ router.get('/data', (req, res) => {
 
 });
 
-/**
- * @swagger
- * /data/{id}:
- *   get:
- *     summary: Get data by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: string
- *         required: true
- *         description: The ID of the data item
- *     responses:
- *       200:
- *         description: A single data item
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/DataItem'
- *       404:
- *         description: Data item not found
- */
 router.get('/data/:id', (req, res) => {
 
     const id = req.params.id;
