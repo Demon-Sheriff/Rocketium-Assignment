@@ -9,22 +9,24 @@ This project is a Node.js application that fetches and serves dummy JSON data. T
 ```
 Rocketium-Assignment/
 │
-├── data/
-│ └── Data.json
 ├── node_modules/
 ├── src/
-│ ├── controllers/
-│ │ └── dataController.js
-│ ├── routes/
-│ │ └── dataRoutes.js
-│ ├── scripts/
-│ │ └── fetchData.js
-│ └── app.js
+│   ├── controllers/
+│   │   └── dataController.js
+│   ├── data/
+│   │   └── Data.json
+│   ├── routes/
+│   │   └── dataRoutes.js
+│   ├── scripts/
+│   │   └── fetchData.js
+│   └── app.js
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
-└── server.js
+├── server.js
+└── swagger.json
 ```
+**Note :** The data directory will be generated once the script is run.
 
 ## Installation and Setup
 
